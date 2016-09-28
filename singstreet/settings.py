@@ -88,6 +88,12 @@ DATABASES = {
         'PORT': '',
     }
 }
+import sys
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase'
+    }
 
 
 # Internationalization
@@ -108,3 +114,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, '../static'))
+
+
+# Media Files (mp3,)
+MEDIA_URL='/media/'
+MEDIA_ROOT= os.path.abspath(os.path.join(BASE_DIR, '../media'))
+
+
+#email settings
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='subha.py@gmail.com'
+EMAIL_PORT=587
+EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_PASSWORD')
+EMAIL_USE_TLS=True

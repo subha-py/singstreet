@@ -1,7 +1,15 @@
 from django.db import models
+
+
 from artist.models import Artist
 from album.models import Album
-# Create your models here.
+
+
+
+def song_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/year/month/date/genre/slug
+    return 'song/{0}/%Y/%m/%d/{1}'.format(instance.genre,instance.slug)
+
 class Song(models.Model):
     title=models.CharField(max_length=500)
     slug=models.SlugField(max_length=500)
@@ -21,11 +29,11 @@ class Song(models.Model):
     )
 
     genre = models.CharField(
-        max_length=10,
+        max_length=200,
         choices=GENRE_CHOICES,
         default='pop',
     )
-
+    file= models.FileField(upload_to=song_directory_path,null=True)
     artist=models.ForeignKey(Artist)
     album=models.ManyToManyField(Album)
 
@@ -36,3 +44,4 @@ class Song(models.Model):
 
     timestamp=models.DateTimeField(auto_now_add=True)
     duration=models.DurationField()
+
