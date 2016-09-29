@@ -3,7 +3,7 @@ from django.db import models
 
 from artist.models import Artist
 from album.models import Album
-
+from autoslug import AutoSlugField
 
 
 def song_directory_path(instance, filename):
@@ -12,7 +12,7 @@ def song_directory_path(instance, filename):
 
 class Song(models.Model):
     title=models.CharField(max_length=500)
-    slug=models.SlugField(max_length=500)
+    slug=AutoSlugField(populate_from='title', unique_with='artist__user__username')
 
     GENRE_CHOICES = (
         ('blues','Blues'),
