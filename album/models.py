@@ -15,3 +15,16 @@ class Album(models.Model):
     loved=models.BigIntegerField(default=0)
     listens=models.BigIntegerField(default=0)
     artist=models.ForeignKey(Artist)
+
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    #duration will always be in seconds
+    duration = models.IntegerField(default=0)
+    class Meta:
+        unique_together=['name','artist']
+        ordering=['timestamp']
+
+    def __unicode__(self):
+        return self.name
+    def __str__(self):
+        return self.name

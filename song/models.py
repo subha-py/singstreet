@@ -34,7 +34,6 @@ class Song(models.Model):
         default='pop',
     )
     file= models.FileField(upload_to=song_directory_path,null=True)
-    artist=models.ForeignKey(Artist)
     album=models.ManyToManyField(Album)
 
     listens=models.BigIntegerField()
@@ -43,5 +42,7 @@ class Song(models.Model):
     lyrics=models.TextField()
 
     timestamp=models.DateTimeField(auto_now_add=True)
-    duration=models.DurationField()
+
+    #duration will always be in seconds
+    duration=models.IntegerField(default=0)
 

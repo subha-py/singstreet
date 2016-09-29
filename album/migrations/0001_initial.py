@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import album.models
+import autoslug.fields
 
 
 class Migration(migrations.Migration):
@@ -14,12 +16,23 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Album',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('name', models.CharField(max_length=255)),
-                ('slug', models.SlugField()),
+                ('slug', autoslug.fields.AutoSlugField(editable=False, populate_from='name', unique_with=('artist__user__username',))),
                 ('content', models.TextField()),
-                ('image', models.ImageField(upload_to='')),
+                ('image', models.ImageField(upload_to=album.models.album_directory_path, null=True)),
+                ('loved', models.BigIntegerField(default=0)),
+                ('listens', models.BigIntegerField(default=0)),
+                ('timestamp', models.DateTimeField(auto_now_add=True)),
+                ('duration', models.IntegerField(default=0)),
                 ('artist', models.ForeignKey(to='artist.Artist')),
             ],
+            options={
+                'ordering': ['-timestamp'],
+            },
+        ),
+        migrations.AlterUniqueTogether(
+            name='album',
+            unique_together=set([('name', 'artist')]),
         ),
     ]

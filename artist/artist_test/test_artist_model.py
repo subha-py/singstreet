@@ -33,3 +33,12 @@ class ArtistModelTest(TestCase):
         self.assertEqual(artist_obj.country.lower(),'ireland')
         self.assertEqual(artist_obj.location.lower(),'dublin')
 
+    def test_default_parameters(self):
+        user_obj = get_user_obj_by_name('Farhan Akhtar')
+        artist_obj = Artist.objects.create(
+            user=user_obj,
+            image=get_test_image(),
+        )
+        self.assertEqual(artist_obj.user.username, user_obj.username)
+        self.assertEqual(artist_obj.country.lower(), 'india')
+        self.assertEqual(artist_obj.location.lower(), 'kolkata')
