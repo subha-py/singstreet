@@ -9,8 +9,8 @@ def album_directory_path(instance, filename):
     return 'album/{0}'.format(instance.slug)
 class Album(models.Model):
     name=models.CharField(max_length=255)
-    slug = AutoSlugField(populate_from='name', unique_with='artist__user__username')
-    content=models.TextField()
+    slug = AutoSlugField(populate_from='name', unique=True)
+    content=models.TextField(blank=True)
     image=models.ImageField(upload_to=album_directory_path,null=True)
     loved=models.BigIntegerField(default=0)
     listens=models.BigIntegerField(default=0)
@@ -22,7 +22,7 @@ class Album(models.Model):
     duration = models.IntegerField(default=0)
     class Meta:
         unique_together=['name','artist']
-        ordering=['timestamp']
+        ordering=['-timestamp']
 
     def __unicode__(self):
         return self.name

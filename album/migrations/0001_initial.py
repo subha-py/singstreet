@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import album.models
 import autoslug.fields
+import album.models
 
 
 class Migration(migrations.Migration):
@@ -16,10 +16,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Album',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('name', models.CharField(max_length=255)),
-                ('slug', autoslug.fields.AutoSlugField(editable=False, populate_from='name', unique_with=('artist__user__username',))),
-                ('content', models.TextField()),
+                ('slug', autoslug.fields.AutoSlugField(unique=True, editable=False, populate_from='name')),
+                ('content', models.TextField(blank=True)),
                 ('image', models.ImageField(upload_to=album.models.album_directory_path, null=True)),
                 ('loved', models.BigIntegerField(default=0)),
                 ('listens', models.BigIntegerField(default=0)),

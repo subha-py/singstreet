@@ -1,18 +1,23 @@
 from django.db import models
 
 
-from artist.models import Artist
 from album.models import Album
 from autoslug import AutoSlugField
-
+import datetime
 
 def song_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/year/month/date/genre/slug
-    return 'song/{0}/%Y/%m/%d/{1}'.format(instance.genre,instance.slug)
+    now=datetime.datetime.now()
+    return 'song/{genre}/{year}/{month}/{date}/{slug}'.format(
+        genre=instance.genre,
+        slug=instance.slug,
+        year=now.year,month=now.month,date=now.day
+    )
+
 
 class Song(models.Model):
-    title=models.CharField(max_length=500)
-    slug=AutoSlugField(populate_from='title', unique_with='artist__user__username')
+    name=models.CharField(max_length=500)
+    slug=AutoSlugField(populate_from='name', unique=True)
 
     GENRE_CHOICES = (
         ('blues','Blues'),
@@ -34,15 +39,30 @@ class Song(models.Model):
         default='pop',
     )
     file= models.FileField(upload_to=song_directory_path,null=True)
-    album=models.ManyToManyField(Album)
+    album=models.ManyToManyField(Album,through='Membership')
 
-    listens=models.BigIntegerField()
-    loved=models.BigIntegerField()
-    content=models.TextField()
-    lyrics=models.TextField()
+    listens=models.BigIntegerField(default=0)
+    loved=models.BigIntegerField(default=0)
+    content=models.TextField(blank=True)
+    lyrics=models.TextField(blank=True)
 
     timestamp=models.DateTimeField(auto_now_add=True)
 
     #duration will always be in seconds
     duration=models.IntegerField(default=0)
 
+    class Meta:
+        ordering=['-timestamp']
+
+    def __unicode__(self):
+        return self.name
+    def __str__(self):
+        return self.name
+
+class Membership(models.Model):
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    date_joined = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together=['song','album']

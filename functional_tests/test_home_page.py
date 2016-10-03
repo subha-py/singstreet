@@ -2,8 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 from .base import FunctionalTest
-
+from django.test import tag
 class NewVisitorTest(FunctionalTest):
+
+    @tag('functional')
     def test_can_start_a_list_and_retrive_it_later(self):
         '''
         Edith has heard about a cool new online song app.She goes

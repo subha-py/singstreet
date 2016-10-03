@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import artist.models
 from django.conf import settings
+import artist.models
 
 
 class Migration(migrations.Migration):
@@ -16,10 +16,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Artist',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('image', models.ImageField(upload_to=artist.models.artist_directory_path, null=True)),
-                ('country', models.CharField(default='india', max_length=255)),
-                ('location', models.CharField(default='kolkata', max_length=255)),
+                ('country', models.CharField(max_length=255, default='india')),
+                ('location', models.CharField(max_length=255, default='kolkata')),
                 ('listens', models.BigIntegerField(default=0)),
                 ('loved', models.BigIntegerField(default=0)),
                 ('timestamp', models.DateTimeField(auto_now_add=True)),

@@ -11,7 +11,7 @@ from django.core.exceptions import ValidationError
 
 def get_test_image():
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    image_path=os.path.abspath(os.path.join(BASE_DIR, 'static/img/test.jpg'))
+    image_path=os.path.abspath(os.path.join(BASE_DIR, 'static/img/test/test.jpg'))
     image = SimpleUploadedFile(name='test_image.jpg', content=open(image_path, 'rb').read(), content_type='image/jpeg')
     return image
 def get_artist_obj_by_name(name='elspeth',location='Athens',country='Greece',):
@@ -118,7 +118,7 @@ class AlbumModelTest(TestCase):
         )
 
 
-        self.assertEqual(list(Album.objects.all()),[album_obj1,album_obj2,album_obj3,album_obj4])
+        self.assertEqual(list(Album.objects.all()),[album_obj4,album_obj3,album_obj2,album_obj1])
 
     def test_string_representation(self):
         artist_obj = get_artist_obj_by_name('Conor Lalor', 'Dublin', 'Ireland')
