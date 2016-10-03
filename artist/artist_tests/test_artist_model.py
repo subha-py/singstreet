@@ -8,7 +8,7 @@ from django.template.defaultfilters import slugify
 
 def get_test_image():
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    image_path=os.path.abspath(os.path.join(BASE_DIR, 'static/img/test/test.jpg'))
+    image_path=os.path.abspath(os.path.join(BASE_DIR, 'artist_tests/test.jpg'))
     image = SimpleUploadedFile(name='test_image.jpg', content=open(image_path, 'rb').read(), content_type='image/jpeg')
     return image
 def get_user_obj_by_name(name='elspeth'):

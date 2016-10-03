@@ -12,12 +12,12 @@ from django.core.exceptions import ValidationError
 
 def get_test_image():
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    image_path=os.path.abspath(os.path.join(BASE_DIR, 'static/img/test/test.jpg'))
+    image_path=os.path.abspath(os.path.join(BASE_DIR, 'song_tests/test.jpg'))
     image = SimpleUploadedFile(name='test_image.jpg', content=open(image_path, 'rb').read(), content_type='image/jpeg')
     return image
 def get_test_song():
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    file_path = os.path.abspath(os.path.join(BASE_DIR, 'static/sound/test.mp3'))
+    file_path = os.path.abspath(os.path.join(BASE_DIR, 'song_tests/test.mp3'))
     afile = SimpleUploadedFile(name='test.mp3', content=open(file_path, 'rb').read(), content_type='audio/mp3')
     return afile
 def get_album_obj_by_name(name='singstreet'):
