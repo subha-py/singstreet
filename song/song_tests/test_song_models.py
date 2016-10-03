@@ -108,3 +108,72 @@ class SongModelTest(TestCase):
 
         self.assertIn(album_obj1,song_obj.album.all())
         self.assertIn(album_obj2, song_obj.album.all())
+
+    def test_song_ordering(self):
+        album_obj = get_album_obj_by_name()
+        song_obj1 = Song.objects.create(
+            name='Riddle of the model',
+            file=get_test_song(),
+            content='This is a test content',
+            lyrics='This is demo lyrics',
+            duration=600,
+            genre='rock'
+        )
+        m1 = Membership.objects.create(
+            song=song_obj1,
+            album=album_obj,
+        )
+        song_obj2 = Song.objects.create(
+            name='Riddle of the model2',
+            file=get_test_song(),
+            content='This is a test content',
+            lyrics='This is demo lyrics',
+            duration=600,
+            genre='rock'
+        )
+        m1 = Membership.objects.create(
+            song=song_obj2,
+            album=album_obj,
+        )
+        song_obj3 = Song.objects.create(
+            name='Riddle of the model3',
+            file=get_test_song(),
+            content='This is a test content',
+            lyrics='This is demo lyrics',
+            duration=600,
+            genre='rock'
+        )
+        m1 = Membership.objects.create(
+            song=song_obj3,
+            album=album_obj,
+        )
+        song_obj4 = Song.objects.create(
+            name='Riddle of the model4',
+            file=get_test_song(),
+            content='This is a test content',
+            lyrics='This is demo lyrics',
+            duration=600,
+            genre='rock'
+        )
+        m1 = Membership.objects.create(
+            song=song_obj4,
+            album=album_obj,
+        )
+
+        self.assertEqual(list(Song.objects.all()), [song_obj4, song_obj3, song_obj2, song_obj1])
+
+    def test_string_representation(self):
+        album_obj = get_album_obj_by_name()
+        song_obj = Song.objects.create(
+            name='Riddle of the model',
+            file=get_test_song(),
+            content='This is a test content',
+            lyrics='This is demo lyrics',
+            duration=600,
+            genre='rock'
+        )
+        m1 = Membership.objects.create(
+            song=song_obj,
+            album=album_obj,
+        )
+        self.assertEqual(str(song_obj), 'Riddle of the model')
