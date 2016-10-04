@@ -20,5 +20,21 @@ a:active {
 
 /* color of navbar changes here */
 .navbar{
-    background-color:#34FF99;
+    background-color:#A687FF;
+}
+
+
+/* logo picture handler */
+.logoimg{
+      display: block;
+      max-width:230px;
+      max-height:95px;
+      width: auto;
+      height: auto;
+}
+
+
+/* changes color of navbar text */
+.nav li.nav-link a {
+  color: white;
 }

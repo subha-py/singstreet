@@ -8,8 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block title %}Sing Street{% endblock %}</title>
-
+    <title>{% block title %}SingStreet{% endblock %}</title>
     <!-- Bootstrap Core CSS -->
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -34,11 +33,24 @@
 <body>
 
     {% block navbar %}
-        <nav class="navbar navbar-light ">
-            <a class="navbar-brand" href="#">SingStreet</a>
-            {% if user.email %}
+            <nav class = "navbar navbar-default" role = "navigation">
+
+                   <div class = "navbar-header">
+                      <button type = "button" class = "navbar-toggle"
+                         data-toggle = "collapse" data-target = "#example-navbar-collapse">
+                         <span class = "sr-only">Toggle navigation</span>
+                         <span class = "icon-bar"></span>
+                         <span class = "icon-bar"></span>
+                         <span class = "icon-bar"></span>
+                      </button>
+
+                      <a class="navbar-brand page-scroll" href="#page-top"><img class="logoimg" src="/static/img/logo.png" alt="logo"></a>
+                   </div>
+                <div class = "collapse navbar-collapse" id = "example-navbar-collapse">
              <ul class="nav navbar-nav navbar-right">
-                 <li class="dropdown">
+            {% if user.email %}
+
+                 <li class="dropdown nav-link">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Your Account
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -47,13 +59,15 @@
                       <li><a href="/accounts/logout/">Logout</a></li>
                     </ul>
                   </li>
-             </ul>
+
             {% else %}
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/artist/create/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="/artist/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
+
+                <li class="nav-link"><a href="/artist/create/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li class="nav-link"><a href="/artist/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
             {% endif %}
+             </ul>
+                    </div>
         </nav>
     {% endblock %}
 
