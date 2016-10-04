@@ -1,3 +1,8 @@
+ body {
+        font-family: 'Graduate', cursive;
+      }
+
+
 a:link {
     color: white;
 }
@@ -37,4 +42,28 @@ a:active {
 /* changes color of navbar text */
 .nav li.nav-link a {
   color: white;
+}
+
+/* changes color of dropdown text in navbar */
+.nav ul.dropdown-menu a{
+    color:black;
+}
+
+input[type="text"]
+{
+
+
+    font-family: 'Comfortaa', cursive;
+
+}
+
+input[type='email']
+{
+    font-family: 'Comfortaa', cursive;
+
+}
+input[type='password']
+{
+    font-family: 'Comfortaa', cursive;
+
 }
