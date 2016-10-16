@@ -47,6 +47,7 @@ class UserForm(forms.ModelForm):
 
 
 class ArtistForm(forms.ModelForm):
+    username=forms.CharField(label='Username')
     image=forms.ImageField(label='Upload Picture')
     class Meta:
         model = Artist
@@ -56,3 +57,4 @@ class ArtistForm(forms.ModelForm):
     def save(self, for_user):
         self.instance.user = for_user
         return super().save()
+

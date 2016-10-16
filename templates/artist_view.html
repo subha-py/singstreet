@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+    {{ user.socialaccount_set.all.0.extra_data }}
+        {{ artist_obj.location }}
+        {{ artist_obj.country }}
+    <img src="{{ artist_obj.image.url }}" alt="{{ artist_obj.user.username }}">
+{% endblock %}

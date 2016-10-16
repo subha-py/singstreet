@@ -2,4 +2,8 @@
 
 {% block content %}
     <h1>Home page content goes here</h1>
+    {% if user.is_authenticated %}
+        {{ user.socialaccount_set.all.0.extra_data }}
+        {{ user.artist.location }}
+    {% endif %}
 {% endblock %}

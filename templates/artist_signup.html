@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load socialaccount %}
+{% block content %}
+
+<div class="container">
+    <div class="jumbotron">
+    <h1>SingStreet Signup Page</h1>
+    <p>Welcome to SingStreet, join us and all musicians from all over the world to rock together.</p>
+  </div>
+    <form class="form" method="post" action="." enctype="multipart/form-data">{% csrf_token %}
+        <div class="col-xs-8">
+            <div class="row">
+                <a href="{% provider_login_url "google" method="oauth2" %}" class='btn btn-danger'>Google Connect</a><br>
+
+                {% providers_media_js %}
+                <a href="{% provider_login_url "facebook" method="js_sdk" %}" class='btn btn-info'>Facebook Connect</a>
+            </div>
+        </div>
+        </a>
+    </form>
+</div>
+{% endblock %}
+

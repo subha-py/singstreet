@@ -8,11 +8,18 @@ urlpatterns = [
     # Examples:
     # url(r'^$', 'singstreet.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^artist/', include('artist.urls')),
-    url(r'^song/',include('song.urls')),
-    url(r'^album/', include('album.urls')),
-    url(r'^playlist/', include('album.urls')),
+
+
+
+    #user created urls
+    url(r'^artist/', include('artist.urls',namespace='artist')),
+    url(r'^song/',include('song.urls',namespace='song')),
+    url(r'^album/', include('album.urls',namespace='album')),
+    #url(r'^playlist/', include('album.urls'),namespace='playlist'),
+    #admin page urls
     url(r'^admin/', include(admin.site.urls)),
+    #main page url
     url(r'^$',TemplateView.as_view(template_name='home.html'), name='home'),
-    url(r'', include('social_auth.urls')),
+    #thrid party urls
+    url(r'^accounts/', include('allauth.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

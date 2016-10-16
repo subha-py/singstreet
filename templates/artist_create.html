@@ -6,9 +6,6 @@
 
     <form class="form" method="post" action="." enctype="multipart/form-data">{% csrf_token %}
         <div class="col-xs-8">
-            <div class="row">
-                {% bootstrap_form userform layout='horizontal' %}
-            </div>
 
             <div class="row">
                 {% bootstrap_form artistform layout='horizontal' %}
@@ -19,6 +16,8 @@
             </button>
 
         </div>
+
+
     </form>
 </div>
 {% endblock %}
