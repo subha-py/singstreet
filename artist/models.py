@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ValidationError
 
 
 def artist_directory_path(instance, filename):
@@ -32,3 +33,12 @@ class Artist(models.Model):
 
     def get_absolute_url(self):
         return reverse("artist:view", kwargs={"username": self.user.username})
+
+    # def clean(self):
+    #     if len(self.user.username)<5:
+    #         raise ValidationError('Username must be 5 characters or more ')
+    #     if len(str(self.user.first_name))< 3:
+    #         print(self.user.first_name)
+    #         raise ValidationError('Firstname must be 3 characters or more ')
+    #     if len(str(self.user.last_name)) < 2:
+    #             raise ValidationError('Lastname must be 2 characters or more ')

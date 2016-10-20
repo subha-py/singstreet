@@ -54,16 +54,16 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Your Account
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                      <li><a href="{{ user.artist.get_absolute_url }}">Profile</a></li>
-                      <li><a href="/artist/settings/">Settings</a></li>
-                      <li><a href="/accounts/logout/">Logout</a></li>
+                      <li><a id="artist_view" href="{{ user.artist.get_absolute_url }}">Profile</a></li>
+                      <li><a id="artist_update" href="/artist/update/">Settings</a></li>
+                      <li><a id="artist_logout" href="/accounts/logout/">Logout</a></li>
                     </ul>
                   </li>
 
             {% else %}
 
-                <li class="nav-link"><a href="/artist/signup/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li class="nav-link"><a href="/artist/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li class="nav-link"><a id="artist_signup" href="/artist/signup/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li class="nav-link"><a id="artist_login" href="/artist/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 
             {% endif %}
              </ul>

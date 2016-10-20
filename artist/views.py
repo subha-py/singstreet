@@ -1,10 +1,10 @@
 from django.contrib.auth import login
 from .models import Artist
 from django.shortcuts import render,redirect,get_object_or_404
-from artist.forms import ArtistForm
-from django.contrib.auth.backends import ModelBackend
-from allauth.account.auth_backends import AuthenticationBackend
-
+from artist.forms import ArtistForm,UserForm
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.forms import ValidationError
 
 
 # Create your views here.
@@ -26,7 +26,6 @@ def create_artist(request):
         if user.username != artistform.cleaned_data.get('username'):
             user.username = artistform.cleaned_data.get('username')
             user.save()
-            login(request,user)
         artist_obj = artistform.save(for_user=user)
         return redirect(artist_obj.get_absolute_url())
     else:
@@ -43,5 +42,29 @@ def view_artist(request,username):
     }
     return render(request,'artist_view.html',context)
 
-def delete_artist(request,slug):
-    pass
+
+@login_required(login_url='/artist/login/')
+def update_artist(request):
+    user = request.user
+    artistform = ArtistForm(request.POST or None, request.FILES or None,
+                            prefix='artist',instance=user.artist,
+                            initial={'username':user.username}
+                            )
+    userform=UserForm(request.POST or None,request.FILES or None,prefix='user',instance=user)
+    if artistform.is_valid() and userform.is_valid():
+        first_name=userform.cleaned_data.get('first_name')
+        user=userform.save()
+        artist_obj = artistform.save(for_user=user)
+        return redirect(artist_obj.get_absolute_url())
+    else:
+        context = {
+            'artistform': artistform,
+            'userform': userform,
+        }
+        return render(request, 'update_artist.html', context)
+
+def delete_artist(request):
+    user=request.user
+    User=get_user_model()
+    User.objects.get(username=user.username).delete()
+    return redirect('/')

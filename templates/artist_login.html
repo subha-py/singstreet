@@ -11,10 +11,10 @@
     <form class="form" method="post" action="." enctype="multipart/form-data">{% csrf_token %}
         <div class="col-xs-8">
             <div class="row">
-                <a href="{% provider_login_url "google" method="oauth2" %}" class='btn btn-danger'>Google Connect</a><br>
+                <a id="google_login" href="{% provider_login_url "google" method="oauth2" %}" class='btn btn-danger'>Google Connect</a><br>
 
                 {% providers_media_js %}
-                <a href="{% provider_login_url "facebook" method="js_sdk" %}" class='btn btn-info'>Facebook Connect</a>
+                <a id="facebook_login" href="{% provider_login_url "facebook" method="js_sdk" %}" class='btn btn-info'>Facebook Connect</a>
             </div>
         </div>
         </a>

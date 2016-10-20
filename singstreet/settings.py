@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     #third party apps
     'bootstrap3',
+    # 'debug_toolbar',
     #allauth apps
     'allauth',
     'allauth.account',
@@ -63,9 +64,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
-
+INTERNAL_IPS=['127.0.0.1']
 
 ROOT_URLCONF = 'singstreet.urls'
 
